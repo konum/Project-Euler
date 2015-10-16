@@ -8,12 +8,23 @@ import java.util.stream.Stream;
 //
 //By considering the terms in the Fibonacci sequence whose values do not exceed four million, find the sum of the even-valued terms.
 
-public class Problem2 {
+import core.EulerpProblem;
+
+public class Problem2 extends EulerpProblem {
+	public Problem2() {
+		this.setName("Problem2");
+	}
+
 	public static void main(String[] args) {
+		new Problem1().run();
+	}
+
+	public void solve() {
 		long sum = Stream
-				.iterate(new long[] { 1, 1 },p -> new long[] { p[1], p[0] + p[1] }).limit(50)
+				.iterate(new long[] { 1, 1 },
+						p -> new long[] { p[1], p[0] + p[1] }).limit(50)
 				.filter(val -> val[1] < 4000000 && val[1] % 2 == 0)
 				.collect(Collectors.summarizingLong(p -> p[1])).getSum();
-		System.out.println(sum);
+		this.setResult(sum);
 	}
 }
